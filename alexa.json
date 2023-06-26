@@ -1,0 +1,179 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "ajuda unimed",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "HelloWorldIntent",
+                    "slots": [],
+                    "samples": [
+                        "olá",
+                        "como vai você",
+                        "diga oi mundo",
+                        "diga oi",
+                        "oi",
+                        "diga olá mundo",
+                        "diga olá"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "chamarMenu",
+                    "slots": [
+                        {
+                            "name": "setor",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{setor}"
+                            ]
+                        },
+                        {
+                            "name": "cpf",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{cpf}"
+                            ]
+                        },
+                        {
+                            "name": "menu",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "menu"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "menu",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "{menu}"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setor",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "6"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "5"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "4"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "3"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "2"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "1"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "chamarMenu",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "setor",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.167838241751.1353222449068"
+                            }
+                        },
+                        {
+                            "name": "cpf",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.1457991303224.1522267046036"
+                            }
+                        },
+                        {
+                            "name": "menu",
+                            "type": "AMAZON.SearchQuery",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.311783936032.439919471833"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "ALWAYS"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.1457991303224.1522267046036",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Antes de tudo, para prosseguirmos, poderia informar o cpf do paciente?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.311783936032.439919471833",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Okay, o que gostaria de solicitar?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.167838241751.1353222449068",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Qual setor gostaria de chamar Fale UM para Enfermaria, dois para Limpeza, três para Manutencao, quatro para Nutricao, cinco para Fincanceiro"
+                    }
+                ]
+            }
+        ]
+    }
+}
