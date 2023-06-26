@@ -1,0 +1,25 @@
+{
+  "name": "teste-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ask-sdk-core": "^2.14.0",
+    "aws-lambda": "^1.0.7",
+    "aws-sdk": "^2.1390.0",
+    "aws-xray-sdk-core": "^3.5.0",
+    "aws-xray-sdk-mysql": "^3.5.0",
+    "i": "^0.3.7",
+    "knex": "^2.4.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.3.3",
+    "npm": "^9.7.1",
+    "uuid": "^9.0.0"
+  }
+}
