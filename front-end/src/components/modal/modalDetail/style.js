@@ -1,47 +1,63 @@
-import styled from 'styled-components';
-import {colors} from '../../../settings/colors/colors';
+import styled, { keyframes } from 'styled-components';
+import { colors } from '../../../settings/colors/colors';
 import CloseIcon from '@mui/icons-material/Close';
-import SimpleText from '../../text/simpleText';
 
-export const Header = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 20px;
-    gap: 35%
-`;
-
-export const Close = styled(CloseIcon)`
-    cursor: pointer;
-    color: ${colors.green};
-`;
-
-export const Text = styled(SimpleText)`
-    color: ${colors.green};
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+const slideIn = keyframes`
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
 `;
 
 export const ModalContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 `;
 
 export const ModalContent = styled.div`
-  width: 60%;
-  height: 40%;
-  background-color: ${colors.white};
-  padding: 20px;
-  border: 2px solid ${colors.green};
+  background: ${colors.white};
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 500px;
+  animation: ${slideIn} 0.3s ease;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid ${colors.light};
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+`;
+
+export const Close = styled(CloseIcon)`
+  cursor: pointer;
+  font-size: 24px;
+  color: ${colors.primary};
+`;
+
+export const Text = styled.div`
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 30px;
+  color: ${colors.primaryDark};
+`;
+
+export const CategoryContent = styled.div`
+  border: 2px solid ${colors.primaryLight};
+  border-radius: 8px 8px 0px 8px;
+  box-shadow: 0 4px 4px rgba(0, 153, 92, 0.2);
+  margin-bottom: 20px;
+  padding: 10px;
 `;

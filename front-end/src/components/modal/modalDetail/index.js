@@ -1,29 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextWithValue from '../../text/textWithValue';
-import { Header, Text, Close , ModalContainer, ModalContent } from './style';
-import {colors} from '../../../settings/colors/colors';
+import { Header, Text, Close, ModalContainer, ModalContent, CategoryContent } from './style';
 
 const ModalDetail = ({ data, closeModal }) => {
-    return (
+  return (
     <ModalContainer>
       <ModalContent>
         <Header>
+          <Text>Detalhes do Atendimento</Text>
           <Close onClick={closeModal} />
-          <Text label="Detalhes do paciente" color={colors.green}></Text>
-        </  Header>
-        <TextWithValue label= 'Nome' value={data.nome} />
-        <TextWithValue label= 'Idade' value={data.idade} />
-        <TextWithValue label= 'Status' value={data.status} />
-        <TextWithValue label= 'Solicitação' value={data.solicitacao} />
+        </Header>
+        <CategoryContent>
+          <TextWithValue label="Nome" value={data.nome} />
+          <TextWithValue label="Idade" value={data.idade} />
+          <TextWithValue label="Sexo" value={data.sexo} />
+        </CategoryContent>
+        <CategoryContent>
+          <TextWithValue label="Quarto" value={data.quarto} />
+          <TextWithValue label="Acompanhante" value={data.acompanhante} />
+          <TextWithValue label="Plano Médico" value={data.tipoDePlano} />
+        </CategoryContent>
+        <TextWithValue label="Estado de Saúde" value={data.estadoDeSaude} />
+        <TextWithValue label="Solicitação" value={data.solicitacao} />
       </ModalContent>
     </ModalContainer>
-    )
+  );
 };
 
 ModalDetail.propTypes = {
-    data: PropTypes.object.isRequired,
-    closeModal: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default ModalDetail;

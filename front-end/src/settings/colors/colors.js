@@ -1,5 +1,25 @@
 export const colors = {
-    green: '#00995C',
-    white: '#fff',
-    strongGray: '#878787',
-  };
+  primary: '#00A76D',
+  green: '#00A76D',
+  primaryDark: '#008A5A',
+  primaryLight: '#58C09F',
+  secondary: '#8E91A8',
+  info: '#2C8CED',
+  success: '#60C466',
+  warning: '#FFA13D',
+  error: '#FF6B6B',
+  light: '#F4F5F7',
+  dark: '#2C3E63',
+  white: '#FFFFFF',
+  strongGray: '#9A9A9A',
+
+  //Cores do sistema de urgência
+  Pontos1: '#00A76D', 
+  Pontos2: '#FBBC04',
+  Pontos3: '#EA4335',
+  Default: '#A9A9A9',
+  Pontos1Dark: '#008A5A',
+  Pontos2Dark: '#E4A703',
+  Pontos3Dark: '#D63824',
+  DefaultDark: '#707070',
+};
