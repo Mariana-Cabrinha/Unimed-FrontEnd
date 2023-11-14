@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import TextWithValue from '../../text/textWithValue';
 import { Header, Text, Close, ModalContainer, ModalContent, CategoryContent } from './style';
 
 const ModalDetail = ({ data, closeModal }) => {
+  const modalContentRef = useRef(null);
+
+  const handleClickOutside = (event) => {
+    if (modalContentRef.current && !modalContentRef.current.contains(event.target)) {
+      closeModal();
+    }
+  };
+
   return (
-    <ModalContainer>
-      <ModalContent>
+    <ModalContainer onClick={handleClickOutside}>
+      <ModalContent ref={modalContentRef}>
         <Header>
           <Text>Detalhes do Atendimento</Text>
           <Close onClick={closeModal} />

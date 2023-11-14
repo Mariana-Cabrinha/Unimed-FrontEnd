@@ -12,6 +12,7 @@ const TextArea = ({ label, value, onChange }) => (
 TextArea.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default TextArea;

@@ -15,7 +15,6 @@ export const Container = styled.div`
   align-items: left;
   justify-content: space-between;
   transition: transform 0.2s;
-  cursor: pointer;
   position: relative;
 
   &:hover {

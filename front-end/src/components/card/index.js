@@ -6,23 +6,44 @@ import { Buttons, Container, CardTitle } from './styles';
 import { colors } from '../../settings/colors/colors';
 
 const Card = ({ data, openModalDetail, openModalService }) => {
-  const { idAtendimento, nome, solicitacao, quarto, estadoDeSaude } = data;
+  const { idAtendimento, nome, solicitacao, horarioSolicitacao, quarto } = data;
 
-  const calculatePoints = () => {
-    switch (estadoDeSaude) {
-      case 'Bom':
-        return 1;
-      case 'Regular':
-        return 2;
-      case 'Ruim':
-        return 3;
-      default:
-        return 0;
+  const formatarHora = () => {
+    const dateObject = new Date(horarioSolicitacao);
+    const day = String(dateObject.getDate()).padStart(2, '0');
+    const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+    const hours = String(dateObject.getHours()).padStart(2, '0');
+    const minutes = String(dateObject.getMinutes()).padStart(2, '0');
+
+    return `${day}/${month}, ${hours}:${minutes}`;
+  };
+
+  const calcularHorario = () => {
+    const agora = new Date();
+    const horarioSolicitacaoDate = new Date(horarioSolicitacao);
+
+    const diferencaEmMilissegundos = agora - horarioSolicitacaoDate;
+    const diferencaEmMinutos = Math.floor(diferencaEmMilissegundos / (1000 * 60));
+
+    if (diferencaEmMinutos < 15) {
+      return 2;
+    } else {
+      return 3;
     }
   };
 
-  const determineColor = (pts) => {
-    switch (pts) {
+  const calcularHorarioString = () => {
+    const agora = new Date();
+    const horarioSolicitacaoDate = new Date(horarioSolicitacao);
+
+    const diferencaEmMilissegundos = agora - horarioSolicitacaoDate;
+    const diferencaEmMinutos = Math.floor(diferencaEmMilissegundos / (1000 * 60));
+
+    return `Há ${diferencaEmMinutos} min.`;
+  };
+
+  const determineColor = (pri) => {
+    switch (pri) {
       case 1:
         return { color: colors.Pontos1, colorDark: colors.Pontos1Dark };
       case 2:
@@ -34,15 +55,19 @@ const Card = ({ data, openModalDetail, openModalService }) => {
     }
   };
   
-  const pontos = calculatePoints();
-  const cardColors = determineColor(pontos);
+  const horaFormatada = formatarHora();
+  const prioridade = calcularHorario();
+  const tempo = calcularHorarioString();
+  const cardColors = determineColor(prioridade);
   return (
     <div>
       <Container>
         <CardTitle color={cardColors.color} colorDark={cardColors.colorDark}>{`Atendimento #${idAtendimento}`}</CardTitle>
         <TextWithValue label="Nome" value={nome} />
-        <TextWithValue label="Quarto" value={quarto} />
+        <TextWithValue label="Leito" value={quarto} />
+        <TextWithValue label="Atendimento" value={idAtendimento} />
         <TextWithValue label="Solicitação" value={solicitacao} />
+        <TextWithValue label="Horário" value={`${horaFormatada} (${tempo})`} />
         <Buttons>
           <TextButton label="Detalhes" onClick={() => openModalDetail(data)} />
           <TextButton label="Finalizar Atendimento" onClick={() => openModalService(data)} />

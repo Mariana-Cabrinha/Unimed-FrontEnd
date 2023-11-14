@@ -1,49 +1,85 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {Logo, Container, Label, LabelAndDropdown, Button, Dropdown } from './styles';
+import { Logo, Container, Label, LabelAndDropdown, Button, Dropdown } from './styles';
 import { useNavigate } from 'react-router-dom';
+import TextInput from '../../components/text/textInput';
+import { colors } from '../../settings/colors/colors';
+import Alert from '../../components/alert';
 
 const Home = ({ options }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [selectedOption, setSelectedOption] = useState('');
   const navigate = useNavigate();
-
-  const handleOptionChange = (selectedOption) => {
-    setSelectedOption(selectedOption);
+  const placeholder = selectedOption || "Selecione";
+  const [alertInfo, setAlertInfo] = useState({ show: false, message: '', type: '' });
+  
+  const hideAlert = () => {
+    setAlertInfo({ ...alertInfo, show: false });
   };
 
-  const handleEnter = () => {
-    navigate(`/setor/${selectedOption.id}`);
+  const handleLogin = () => {
+    // Verificação de campos vazios
+    if (!email.trim() || !password.trim()) {
+      setAlertInfo({ show: true, message: "Por favor, insira o email e a senha.", type: "error" });
+      return;
+    }
+  
+    // Validando o formato do email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      setAlertInfo({ show: true, message: "Por favor, insira um email válido.", type: "error" });
+      return;
+    }
+  
+    // Verificando se uma opção foi selecionada
+    if (!selectedOption) {
+      setAlertInfo({ show: true, message: "Por favor, selecione um setor.", type: "error" });
+      return;
+    }
+  
+    // Verificação de credenciais (exemplo)
+    if (email === "admin@teste.com" && password === "admin") {
+      navigate(`/setor/${selectedOption.id}`);
+    } else {
+      setAlertInfo({ show: true, message: "Email ou senha incorretos!", type: "error" });
+    }
   };
 
   return (
     <Container>
       <Logo />
       <LabelAndDropdown>
-      <Label>Selecione o Setor</Label>
-      <Dropdown
-        options={options}
-        value={selectedOption}
-        placeholder= {selectedOption ? selectedOption : "Selecione o Setor"}
-        onChange={(selectedOption) => handleOptionChange(selectedOption)}
-        getOptionLabel={(option) => option.value}
-        getOptionValue={(option) => option.value}
-        theme={(theme) => ({
-          ...theme, 
-          colors: {
-            ...theme.colors,
-            primary: '#4caf50', // Cor do dropdown selecionado
-          },
-        })}
-        styles={{
-          option: (provided, state) => ({
-            ...provided,
-            backgroundColor: state.isFocused ? '#4caf50' : 'transparent', // Cor do background da opção quando o mouse passa por cima
-            color: state.isFocused ? '#ffffff' : 'inherit', // Cor do texto da opção quando o mouse passa por cima
-          }),
-        }}
-      />
+        {alertInfo.show && ( <Alert message={alertInfo.message} type={alertInfo.type} onHide={hideAlert} /> )}
+        <TextInput label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <TextInput label="Senha" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+
+        <Label>Selecione o setor</Label>
+        <Dropdown 
+          options={options}
+          value={selectedOption}
+          placeholder={placeholder}
+          onChange={setSelectedOption}
+          getOptionLabel={(option) => option.value}
+          getOptionValue={(option) => option.value}
+          theme={(theme) => ({
+            ...theme,
+            colors: {
+              ...theme.colors,
+              primary: colors.primaryDark,
+            },
+          })}
+          styles={{
+            option: (provided, state) => ({
+              ...provided,
+              backgroundColor: state.isFocused ? colors.primaryDark : 'transparent',
+              color: state.isFocused ? colors.white : 'inherit',
+            }),
+          }}
+        />
+
       </LabelAndDropdown>
-      <Button disabled= {!selectedOption} onClick={handleEnter}>Entrar</Button>
+      <Button onClick={handleLogin}>Entrar</Button>
     </Container>
   );
 };

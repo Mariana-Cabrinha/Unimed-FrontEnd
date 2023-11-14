@@ -2,24 +2,31 @@ import styled from 'styled-components';
 import { LogoMini } from '../../components/logo/logoMini';
 import { colors } from '../../settings/colors/colors';
 
-export const GreenBanner = styled.div`
-  background-color: ${colors.green};
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const Logo = styled(LogoMini)``;
 
+export const GreenBanner = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: ${colors.primaryDark};
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+`;
+
 export const TextInNav = styled.div`
-  color: ${colors.light};
+  padding: 15px;
+  padding-bottom: 12px;
+  border-radius: 20px 20px 0 20px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: ${colors.white};
+  font-family: 'Nunito', sans-serif;
   font-size: 20px;
-  font-weight: bold;
-  font-family: pt-sans;
-  border: 2px solid ${colors.light};
-  border-radius: 10px 10px 0px 10px;
-  padding: 13px;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+  }
 `;
 
 export const CardContainer = styled.div`
