@@ -4,7 +4,7 @@ import { Logo, GreenBanner, TextInNav } from './styles';
 import NavTab from '../../components/navtab';
 import CardsTab from '../cardsTab';
 import HistoryTab from '../historyTab';
-import AnalyticsTab from '../analyticsTab';
+import AnalysisTab from '../analysisTab';
 import Axios from "axios";
 
 const SectorPage = () => {
@@ -36,18 +36,23 @@ const SectorPage = () => {
     fetchData();
   }, [selectedOption]);
 
+  const data = [
+    { nomeSetor: 'Setor A', quantidadePedidos: 10, pedidosFinalizados: 8 },
+    { nomeSetor: 'Setor B', quantidadePedidos: 15, pedidosFinalizados: 12 }
+  ];
+
   const tabs = [
     { title: 'Solicitações', content: <CardsTab /> },
     { title: 'Histórico', content: <HistoryTab /> },
-    { title: 'Análise de Dados', content: <AnalyticsTab /> }
+    { title: 'Análise de Dados', content: <AnalysisTab data={data}/> }
   ];
-
+  
   return (
     <div>
       <GreenBanner>
         <Logo />
         <TextInNav onMouseOver={() => setHovered(true)} onMouseOut={() => setHovered(false)} onClick={handleEnter}> 
-          {hovered ? "Voltar" : "" + sectorName} 
+          {hovered ? "Voltar" : "" + "Enfermagem"}
         </TextInNav>
       </GreenBanner>
       <NavTab tabs={tabs} />
